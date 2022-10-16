@@ -10,6 +10,9 @@ database management system. Code of PASE is in the folder `postgresql-11.0/contr
 * **faiss** 
 This directory contains the source code of Faiss, a library for efficient similarity search and clustering of dense vectors
 
+* **pic**
+This directory contains part of experiment results.
+
 # Prerequisite
 
 OpenMP 4.0.1
