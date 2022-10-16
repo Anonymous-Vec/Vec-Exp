@@ -48,27 +48,30 @@ OpenMP 4.0.1
 
 ### Start PASE
 
-`cd contrib/PASE`
+`cd contrib/pase`
 
 #### May need to change the Makefile:
 `PG_CONFIG=postgresql-11.0/build/bin/pg_config`
 #### Compile the PASE
 `make USE_PGXS=1`
+
 `make install`
 	
 #### Start the cluster:
+`cd ../..`
+
 `build/bin/pg_ctl -D data start` 
 #### Create a database named "pasetest"
-`postgresql-11.0/build/bin/createdb -p 5432 pasetest`
+`build/bin/createdb -p 5432 pasetest`
 #### Connect the database
-`postgresql-11.0/build/bin/psql -p 5432 pasetest`
+`build/bin/psql -p 5432 pasetest`
 
-### EXAMPLE CODE
-#### In psql command line
+### EXAMPLE CODE Used in Psql Command Line
+#### Create Extension
 
 `create extension pase;`
 
-##### Create table
+##### Create Table
 
 `CREATE TABLE vectors_ivfflat_test ( id serial, vector float4[]);`
 
@@ -103,7 +106,7 @@ INSERT INTO vectors_ivfflat_test SELECT id, ARRAY[id
        ]::float4[] FROM generate_series(1, 50000) id;
 ```
 
-##### Build index
+##### Build Index
 
 ```
 CREATE INDEX v_ivfflat_idx ON vectors_ivfflat_test
@@ -113,7 +116,7 @@ CREATE INDEX v_ivfflat_idx ON vectors_ivfflat_test
     (clustering_type = 1, distance_type = 0, dimension = 256, clustering_params = "10,100");
 ```
 
-##### Search index
+##### Search Index
 
 ```
 SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1'::pase as distance
@@ -135,7 +138,7 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 
 `sudo apt-get install -y libopenblas-dev` 
 
-### Compile and build:
+### Compile and Build:
 `cd faiss`
 
 `cmake -B build . -DFAISS_ENABLE_GPU=OFF -DFAISS_ENABLE_PYTHON=OFF -DCMAKE_BUILD_TYPE=Release -DFAISS_OPT_LEVEL=generic `
@@ -146,7 +149,7 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 
 `make -C build 2-IVFFlat`
 
-### Run the example code:
+### Run the Example Code:
 `./build/tutorial/cpp/2-IVFFlat` 
 
 ### Original Faiss Code:
