@@ -6,57 +6,63 @@ This repository contains code used for comparing performance of PASE and Faiss.
 
 # Prerequisite
 
+OpenMP 4.0.1
 
 # Getting the Source
 `git clone https://github.com/Anonymous-Vec/Vec-Exp.git`
 
-# Checking the Required Environment
+## How to use PASE
+
+### Start PostgreSQL
+
+#### Checking the Required Environment
 
 `sudo apt-get install build-essential libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev libssl-dev libxml2-utils xsltproc ccache`
 
-Enter folder postgresql-11.0/:
+`cd postgresql-11.0`
 
-# Precompile 
+#### Configure
+
+`mkdir build`
 
 `./configure --prefix=$build CFLAGS="-O3" LDFLAGS="-fPIC -fopenmp" `
 
-# Compile
+#### Compile
 `make`
+
 `make install`
 
-## How to use PASE
 
-# initial new cluster named "data" on a folder:
-    `postgresql-11.0/build/bin/initdb -D data `
+#### Initial new cluster named "data" on a folder:
 
-# Set the size of shared buffer in postgresql-11.0/build/data/postgresql.conf/:
+`build/bin/initdb -D data`
+
+#### Set the size of shared buffer in postgresql-11.0/build/data/postgresql.conf/:
 `shared_buffers = 160GB`
 
-## How to use PASE
+### Start PASE
 
-`cd postgresql-11.0/contrib/PASE`
+`cd contrib/PASE`
 
-# Remember, may need you change the Makefile:
+#### Remember, may need you change the Makefile:
 `PG_CONFIG=postgresql-11.0/build/bin/pg_config`
-# Compile the PASE
+#### Compile the PASE
 `make USE_PGXS=1`
 `make install`
 	
-# Start the cluster:
-    `postgresql-11.0/bin/pg_ctl -D data start ` 
-# Create a database named "pasetest" on port 5433
+#### Start the cluster:
+`build/bin/pg_ctl -D data start` 
+#### Create a database named "pasetest"
     `postgresql-11.0/build/bin/createdb -p 5432 pasetest `
-# Connect the database
+#### Connect the database
     `postgresql-11.0/build/bin/psql -p 5432 pasetest `
-# Create PASE extension on PG:
-`CREATE EXTENTION PASE;`
 
-# EXAMPLE CODE
-## In psql command line
+### EXAMPLE CODE
+#### In psql command line
 
 `create extension pase;`
 
-### Create table
+##### Create table
 
 `CREATE TABLE vectors_ivfflat_test ( id serial, vector float4[]);`
 
@@ -91,7 +97,7 @@ INSERT INTO vectors_ivfflat_test SELECT id, ARRAY[id
        ]::float4[] FROM generate_series(1, 50000) id;
 ```
 
-### Build index
+##### Build index
 
 ```
 CREATE INDEX v_ivfflat_idx ON vectors_ivfflat_test
@@ -101,7 +107,7 @@ CREATE INDEX v_ivfflat_idx ON vectors_ivfflat_test
     (clustering_type = 1, distance_type = 0, dimension = 256, clustering_params = "10,100");
 ```
 
-### Search index
+##### Search index
 
 ```
 SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1'::pase as distance
@@ -112,13 +118,20 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ```
 
 
-## Original PASE Code:
+### Original PASE Code:
 
 - [Pase: PostgreSQL Ultra-High Dimensional Approximate Nearest Neighbor Search Extension](https://github.com/alipay/PASE)
 
-# Faiss
+## How to use Faiss
 
 - [Faiss: A Library for Efficient Similarity Search and Clustering of Dense Vectors](https://github.com/facebookresearch/faiss)
 
 
+### Compile and build:
+`cmake -B build . -DFAISS_ENABLE_GPU=OFF -DFAISS_ENABLE_PYTHON=OFF -DCMAKE_BUILD_TYPE=Release -DFAISS_OPT_LEVEL=generic `
+`make -C build -j faiss`  
+`sudo make -C build install` 
+`make -C build 2-IVFFlat`
 
+### Run the example code:
+`./build/tutorial/cpp/2-IVFFlat` 
