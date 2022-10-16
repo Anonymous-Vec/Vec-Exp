@@ -180,9 +180,9 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 
 ## Evaluating Index Construction
 
-![plot](pic/ivfflat_build.png)
-![plot](pic/ivfpq_build.png)
-![plot](pic/HNSW_build.png)
+![plot](results/ivfflat_build.png)
+![plot](results/ivfpq_build.png)
+![plot](results/HNSW_build.png)
 
 
 ## Evaluating Index Size
