@@ -2,7 +2,7 @@
 High-dimensional vector data is becoming increasingly important in data science and AI applications. As a result, different database systems are built for managing vector data recently. Those systems can be broadly classified into two categories: specialized and gener- alized vector databases. Specialized vector databases (e.g., Facebook Faiss, Milvus, Microsoft SPTAG, Pinecone) are developed and op- timized explicitly and specifically for storing and querying vector data, while generalized vector databases (e.g., Alibaba PASE and AnalyticDB-V) support vector data management inside a relational database such as PostgreSQL. However, it is not clear about the performance comparison between the two approaches, and more importantly, what causes the performance gap. In this work, we present a comprehensive experimental study to systematically com- pare the two approaches in terms of index construction, index size, and query processing on a variety of real-world datasets. We drill down the underlying reasons that cause the performance gap and analyze whether the gap is bridgeable. Finally, we provide lessons and directions for building future vector databases that can simulta- neously achieve high performance and generality to serve a broad spectrum of applications.
 
 # About This Repository
-This repository contains code used for comparing performance of PASE and Faiss. PASE is in `postgresql-11.0/contrib/pase`.
+This repository contains code used for comparing performance of PASE and Faiss. PASE is in `postgresql-11.0/contrib/pase`. Faiss is in `faiss`.
 
 # Prerequisite
 
@@ -124,42 +124,49 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 
 ## How to use Faiss
 
-- [Faiss: A Library for Efficient Similarity Search and Clustering of Dense Vectors](https://github.com/facebookresearch/faiss)
-
 ### Prerequisite
 `sudo apt install intel-mkl`
+
 `sudo apt-get install -y libopenblas-dev` 
 
 ### Compile and build:
 `cd faiss`
+
 `cmake -B build . -DFAISS_ENABLE_GPU=OFF -DFAISS_ENABLE_PYTHON=OFF -DCMAKE_BUILD_TYPE=Release -DFAISS_OPT_LEVEL=generic `
+
 `make -C build -j faiss`  
+
 `sudo make -C build install` 
+
 `make -C build 2-IVFFlat`
 
 ### Run the example code:
 `./build/tutorial/cpp/2-IVFFlat` 
 
+### Original Faiss Code:
+
+- [Faiss: A Library for Efficient Similarity Search and Clustering of Dense Vectors](https://github.com/facebookresearch/faiss)
+
 # Comparison Results
 
 ## EVALUATING INDEX CONSTRUCTION
 
-![plot](pic/ivfflat_build.pdf)
-![plot](pic/ivfpq_build.pdf)
-![plot](pic/HNSW_build.pdf)
+![plot](pic/ivfflat_build.png)
+![plot](pic/ivfpq_build.png)
+![plot](pic/HNSW_build.png)
 
 
 ## EVALUATING INDEX SIZE
 
-![plot](pic/ivfflat_indexSize.pdf)
-![plot](pic/ivfpq_indexSize.pdf)
-![plot](pic/HNSW_indexSize.pdf)
+![plot](pic/ivfflat_indexSize.png)
+![plot](pic/ivfpq_indexSize.png)
+![plot](pic/HNSW_indexSize.png)
 
 ## EVALUATING SEARCH PERFORMANCE
 
-![plot](pic/ivfflat_SearchTime.pdf)
-![plot](pic/ivfpq_SearchTime.pdf)
-![plot](pic/HNSW_SearchTime.pdf)
+![plot](pic/ivfflat_SearchTime.png)
+![plot](pic/ivfpq_SearchTime.png)
+![plot](pic/HNSW_SearchTime.png)
 
 
 # Summary
@@ -170,7 +177,7 @@ We summarize the root causes of the performance gap as follows and discuss how t
 
 RC#1: SGEMM Optimization.
 
-RC#2:MemoryManagement.
+RC#2: MemoryManagement.
 
 RC#3: Parallel Execution.
 
