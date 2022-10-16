@@ -11,8 +11,12 @@ database management system.
 ## **faiss** 
 This directory contains the source code of Faiss, a library for efficient similarity search and clustering of dense vectors
 
-## **results**
-This directory contains part of experiment results.
+* **faiss/IndexIVFFlat.cpp:** Faiss index IVF_FLAT implementation
+
+* **faiss/IndexIVFPQ.cpp:** Faiss index IVF_PQ implementation
+
+* **faiss/IndexHNSW.cpp:** Faiss index HNSW implementation
+
 
 ## **pase**
 
@@ -180,21 +184,30 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 
 ## Evaluating Index Construction
 
+### IVF_FLAT
 ![plot](results/ivfflat_build.png)
+### IVF_PQ
 ![plot](results/ivfpq_build.png)
+### HNSW
 ![plot](results/HNSW_build.png)
 
 
 ## Evaluating Index Size
 
+### IVF_FLAT
 ![plot](results/ivfflat_indexSize.png)
+### IVF_PQ
 ![plot](results/ivfpq_indexSize.png)
+### HNSW
 ![plot](results/HNSW_indexSize.png)
 
 ## Evaluating Index Performance
 
+### IVF_FLAT
 ![plot](results/ivfflat_SearchTime.png)
+### IVF_PQ
 ![plot](results/ivfpq_SearchTime.png)
+### HNSW
 ![plot](results/HNSW_SearchTime.png)
 
 
