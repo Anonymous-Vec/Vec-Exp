@@ -71,7 +71,7 @@ OpenMP 4.0.1
 
 `create extension pase;`
 
-##### Create Table
+#### Create Table
 
 `CREATE TABLE vectors_ivfflat_test ( id serial, vector float4[]);`
 
@@ -106,7 +106,7 @@ INSERT INTO vectors_ivfflat_test SELECT id, ARRAY[id
        ]::float4[] FROM generate_series(1, 50000) id;
 ```
 
-##### Build Index
+#### Build Index
 
 ```
 CREATE INDEX v_ivfflat_idx ON vectors_ivfflat_test
@@ -116,7 +116,7 @@ CREATE INDEX v_ivfflat_idx ON vectors_ivfflat_test
     (clustering_type = 1, distance_type = 0, dimension = 256, clustering_params = "10,100");
 ```
 
-##### Search Index
+#### Search Index
 
 ```
 SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1'::pase as distance
