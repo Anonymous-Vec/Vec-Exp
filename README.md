@@ -5,23 +5,7 @@ This project aims to investigate the performance difference between specialized 
 
 ## **postgresql-11.0** 
 This directory contains the source code distribution of the PostgreSQL
-database management system. Code of PASE is in the folder `postgresql-11.0/contrib/pase`. 
-
-## **pase**
-
-Code of PASE is in the directory **postgresql-11.0/contrib/pase**. 
-
-* ***ivfflat: *** PASE index IVF_FLAT implementation
-
-* ***ivfpq: *** PASE index IVF_PQ implementation
-
-* ***hnsw: *** PASE index HNSW implementation
-
-* ***sql: *** Sample SQL file for PASE
-
-* ***type: *** Data types used in PASE
-
-* ***utils: *** Util functions used in PASE
+database management system.
 
 
 ## **faiss** 
@@ -29,6 +13,22 @@ This directory contains the source code of Faiss, a library for efficient simila
 
 ## **results**
 This directory contains part of experiment results.
+
+## **pase**
+
+Code of PASE is in the directory **postgresql-11.0/contrib/pase**. 
+
+* **ivfflat:** PASE index IVF_FLAT implementation
+
+* **ivfpq:** PASE index IVF_PQ implementation
+
+* **hnsw:** PASE index HNSW implementation
+
+* **sql:** Sample SQL file for PASE
+
+* **type:** Data types used in PASE
+
+* **utils:** Util functions used in PASE
 
 # Prerequisite
 
