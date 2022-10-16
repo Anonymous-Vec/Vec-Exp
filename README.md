@@ -201,7 +201,7 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ### HNSW
 ![plot](results/HNSW_indexSize.png)
 
-## Evaluating Index Performance
+## Evaluating Search Performance
 
 ### IVF_FLAT
 ![plot](results/ivfflat_SearchTime.png)
