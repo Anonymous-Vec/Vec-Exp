@@ -187,15 +187,15 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 
 ## Evaluating Index Size
 
-![plot](pic/ivfflat_indexSize.png)
-![plot](pic/ivfpq_indexSize.png)
-![plot](pic/HNSW_indexSize.png)
+![plot](results/ivfflat_indexSize.png)
+![plot](results/ivfpq_indexSize.png)
+![plot](results/HNSW_indexSize.png)
 
 ## Evaluating Index Performance
 
-![plot](pic/ivfflat_SearchTime.png)
-![plot](pic/ivfpq_SearchTime.png)
-![plot](pic/HNSW_SearchTime.png)
+![plot](results/ivfflat_SearchTime.png)
+![plot](results/ivfpq_SearchTime.png)
+![plot](results/HNSW_SearchTime.png)
 
 
 # Summary
