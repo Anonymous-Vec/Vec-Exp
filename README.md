@@ -1,8 +1,14 @@
 # Specialized vs. Generalized Vector Databases: How Different Are They Really?
 High-dimensional vector data is becoming increasingly important in data science and AI applications. As a result, different database systems are built for managing vector data recently. Those systems can be broadly classified into two categories: specialized and gener- alized vector databases. Specialized vector databases (e.g., Facebook Faiss, Milvus, Microsoft SPTAG, Pinecone) are developed and op- timized explicitly and specifically for storing and querying vector data, while generalized vector databases (e.g., Alibaba PASE and AnalyticDB-V) support vector data management inside a relational database such as PostgreSQL. However, it is not clear about the performance comparison between the two approaches, and more importantly, what causes the performance gap. In this work, we present a comprehensive experimental study to systematically com- pare the two approaches in terms of index construction, index size, and query processing on a variety of real-world datasets. We drill down the underlying reasons that cause the performance gap and analyze whether the gap is bridgeable. Finally, we provide lessons and directions for building future vector databases that can simulta- neously achieve high performance and generality to serve a broad spectrum of applications.
 
-# About This Repository
-This repository contains code used for comparing performance of PASE and Faiss. PASE is in `postgresql-11.0/contrib/pase`. Faiss is in `faiss`.
+# Repository Contents
+
+* **postgresql-11.0** 
+This directory contains the source code distribution of the PostgreSQL
+database management system. Code of PASE is in the folder `postgresql-11.0/contrib/pase`. 
+
+* **faiss** 
+This directory contains the source code of Faiss, a library for efficient similarity search and clustering of dense vectors
 
 # Prerequisite
 
@@ -175,19 +181,19 @@ This work investigates the performance difference between specialized vector dat
 
 We summarize the root causes of the performance gap as follows and discuss how to bridge the gap:
 
-RC#1: SGEMM Optimization.
+**RC#1: SGEMM Optimization.**
 
-RC#2: MemoryManagement.
+**RC#2: MemoryManagement.**
 
-RC#3: Parallel Execution.
+**RC#3: Parallel Execution.**
 
-RC#4: Disk-centric Page Structure.
+**RC#4: Disk-centric Page Structure.**
 
-RC#5: K-means Implementation.
+**RC#5: K-means Implementation.**
 
-RC#6: Top-k Evaluation in SQL.
+**RC#6: Top-k Evaluation in SQL.**
 
-RC#7: Precomputed Table.
+**RC#7: Precomputed Table.**
 
 
 Overall Message. The overall conclusion of this work is that, for now, generalized vector databases are still much slower than spe- cialized vector databases. Thus, we recommend specialized vector databases for applications that need to manage vector data. How- ever, we see a large room for improvement for generalized vector databases. In the long term, we are still positive that generalized vector databases can be improved up to the speed.
