@@ -53,6 +53,8 @@ OpenMP 4.0.1
 
 `tar -zxvf postgresql-11.0.tar.gz`
 
+Code of PG11 here can not be used directly since some importance files are not uploaded by git.
+
 `cd postgresql-11.0`
 
 #### Configure
