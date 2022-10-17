@@ -49,13 +49,17 @@ OpenMP 4.0.1
 
 `sudo apt-get install build-essential libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev libssl-dev libxml2-utils xsltproc ccache`
 
+`wget https://ftp.postgresql.org/pub/source/v11.0/postgresql-11.0.tar.gz`
+
+`tar -zxvf postgresql-11.0.tar.gz`
+
 `cd postgresql-11.0`
 
 #### Configure
 
 `mkdir build`
 
-`./configure --prefix=$build CFLAGS="-O3" LDFLAGS="-fPIC -fopenmp" `
+`./configure --prefix=$/absolute/path/build CFLAGS="-O3" LDFLAGS="-fPIC -fopenmp" `
 
 #### Compile
 `make`
@@ -158,9 +162,19 @@ SELECT vector <#> '31111,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ## How to use Faiss
 
 ### Prerequisite
+
+C++11 compiler (with support for OpenMP support version 2 or higher)
+
+
+BLAS implementation (we strongly recommend using Intel MKL for best performance).
+
 `sudo apt install intel-mkl`
 
 `sudo apt-get install -y libopenblas-dev` 
+
+
+CMake minimum required(VERSION 3.17)
+
 
 ### Compile and Build:
 `cd faiss`
